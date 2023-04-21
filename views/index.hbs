@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="posts">
+    <div class="row gap-2">
+      {{#each posts as |post|}}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">Created by:
+              {{user_id}}
+              on
+              {{createdOn}}</h6>
+            <a href="post/{{id}}"><button type="submit" class="btn btn-primary">View Post</button></a>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

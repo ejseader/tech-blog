@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="form-box">
+<h1>Register</h1>
+
+<form action="/register" class="signup-form" method="POST">
+<div class="mb-3">
+  <label for="name" class="form-label">Name</label>
+  <input name="name" type="name" class="form-control" id="name" placeholder="Enter Your Preferred Name...">
+</div>
+<div class="mb-3">
+  <label for="email" class="form-label">Email address</label>
+  <input name="email" type="email" class="form-control" id="email" placeholder="Enter Your Email...">
+</div>
+<div class="mb-3">
+  <label for="password" class="form-label">Password</label>
+<input name="password" type="password" class="form-control" id="password" aria-labelledby="passwordHelpBlock" placeholder="Enter a Password...">
+<div id="passwordHelpBlock" class="form-text">
+  Your password must be 8-20 characters long, contain letters, numbers, and special characters, and must not contain spaces or emoji.
+</div>
+</div>
+<div class="d-grid">
+  <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+</form>
+</div>
+</div>
+
+<script src="../../public/js/login.js"></script>

@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="form-box">
+<h1>Create a New Post</h1>
+
+<form action="/private/newpost" method="POST">
+{{#each auth_errors}}
+  <p class="auth-error">{{this}}</p>
+{{/each}}
+<div class="mb-3">
+  <label for="title" class="form-label">Title</label>
+  <input name="title" type="title" class="form-control" id="title">
+</div>
+<div class="mb-3">
+  <label for="content" class="form-label">Body</label>
+<textarea name="content" type="content" class="form-control" id="content">
+</div>
+<div class="d-grid">
+  <button class="btn btn-success">Submit</button>
+  </div>
+</form>
+</div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="dashboard-box">
+<h1>Welcome, {{name}}</h1>
+<hr />
+<div class="row">
+  <h3>View/Edit Your Posts</h3>
+  {{#each posts as |post|}}
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{title}}</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">{{createdOn}}</h6>
+      <button class="btn btn-primary" href=posts/{{id}}>View/Edit Post</button>
+      <button class="btn btn-danger" href="remove/{{id}}">Delete Post</button>
+    </div>
+  </div>
+  {{/each}}
+
+  {{#unless posts}}
+    <p>No posts have been added.</p>
+  {{/unless}}
+</div>
+</div>
+</div>
