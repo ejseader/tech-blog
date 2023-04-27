@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const db = require('../config/connection');
 
 class User extends Model {
-  async validatePass(provided_password) {
+  async checkPassword(provided_password) {
     const is_valid = await bcrypt.compare(provided_password, this.password);
 
     return is_valid;

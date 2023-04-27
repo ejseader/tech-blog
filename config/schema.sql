@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS stt_user_db;
+CREATE DATABASE stt_user_db;

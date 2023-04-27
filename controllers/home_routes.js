@@ -1,5 +1,13 @@
 const router = require('express').Router();
-const { Post, Comment } = require('../models');
+const { Post, Comment, User } = require('../models');
+
+function isAuthenticated(req, res, next) {
+  if (!req.session.user_id) {
+    return res.redirect('/login');
+  }
+
+  next();
+}
 
 // GET all posts for homepage
 router.get('/', async (req, res) => {
@@ -8,15 +16,20 @@ router.get('/', async (req, res) => {
 });
 
 // GET user's posts for dashboard
-router.get('/dashboard', async (req, res) => {
-  const postData = await Post.findAll({
+router.get('/dashboard', isAuthenticated, async (req, res) => {
+  const user = await User.findOne({
       where: {
-        user_id: req.session.id
+        id: req.session.user_id
       },
+      include: Post,
+      attributes: {
+        exclude: ['password']
+      }
     });
+    console.log('triggered');
     res.render('private/dashboard', {
-      postData,
-      loggedIn: req.session.loggedIn,
+      user,
+      loggedIn: true
     });
   });
 
@@ -24,10 +37,11 @@ router.get('/dashboard', async (req, res) => {
 router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
+      include: Comment
     });
 
     const post = postData.get({ plain: true });
-    res.render('/private/post', { post, loggedIn: req.session.loggedIn });
+    res.render('private/post', { post, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -49,11 +63,21 @@ router.get('/comment/:id', async (req, res) => {
 
 // Login route
 router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('private/dashboard');
+  console.log(req.session.user_id);
+  if (req.session.user_id) {
+    res.redirect('/dashboard');
     return;
   }
   res.render('auth/login');
+});
+
+// Register route
+router.get('/register', (req, res) => {
+  if (req.session.user_id) {
+    res.redirect('/dashboard');
+    return;
+  }
+  res.render('auth/register');
 });
 
 module.exports = router;
